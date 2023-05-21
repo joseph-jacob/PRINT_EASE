@@ -79,7 +79,7 @@ document.getElementById("register").addEventListener("click", async function (ev
           Dept: department
         });
         console.log("Document written with ID: ", docRef.id);
-        alert("Form submitted");
+        //alert("Form submitted");
         location.reload();
       } catch (error) {
         console.error(error);
@@ -116,3 +116,29 @@ function validatePassword(password1, password2) {
     return false; // Passwords do not match
   }
 }
+
+
+function changeToSignUp(event) {
+  event.preventDefault(); // Prevent default behavior of the link
+
+  var signinForm = document.getElementById("signin");
+  var signupForm = document.getElementById("signup");
+
+  if (signinForm && signupForm) {
+      signinForm.style.display = "none";
+      signupForm.style.display = "block";
+  }
+}
+
+function changeToSignIn(event) {
+  event.preventDefault(); // Prevent default behavior of the link
+
+  var signinForm = document.getElementById("signin");
+  var signupForm = document.getElementById("signup");
+
+  if (signinForm && signupForm) {
+      signinForm.style.display = "block";
+      signupForm.style.display = "none";
+  }
+}
+
