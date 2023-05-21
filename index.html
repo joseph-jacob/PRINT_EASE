@@ -21,15 +21,15 @@
     <div class="container d-flex justify-content-center align-items-center vh-100">
         <div class="border-1 border-black p-4" id="box">
             <div id="signin" style="display: block;">
-                <form class="form" onsubmit="return validateSignIn()">
+                <form class="form">
                     <p class="form-title">LOGIN</p>
                     <div class="input-container">
-                        <input placeholder="Enter email" type="email" id="emailSignIn">
+                        <input placeholder="Enter email" type="email" id="emailLogin">
                     </div>
                     <div class="input-container">
-                        <input placeholder="Enter password" type="password">
+                        <input placeholder="Enter password" type="password" id="passwordLogin">
                     </div>
-                    <button class="submit" type="submit">
+                    <button class="submit" type="submit" id="login">
                         Sign in
                     </button>
 
@@ -40,35 +40,38 @@
                 </form>
             </div>
             <div id="signup" style="display: none;">
-                <form class="form" onsubmit="return validateSignUp()">
+                <form class="form">
                     <p class="title">Register </p>
                     <p class="message">Signup now and get full access to our app. </p>
                     <div class="flex">
                         <label>
-                            <input required="" placeholder="" type="text" class="input" id="name">
+                            <input required="" placeholder="" type="text" class="input" id="nameRegister">
                             <span>Name</span>
                         </label>
 
                         <label>
-                            <input required="" placeholder="" type="text" class="input" id="department">
+                            <input required="" placeholder="" type="text" class="input" id="departmentRegister">
                             <span>Department</span>
                         </label>
                     </div>
-
                     <label>
-                        <input required="" placeholder="" type="email" class="input" id="email">
+                        <input required="" placeholder="" type="number" class="input" id="phnoRegister">
+                        <span>Mob No.</span>
+                    </label>
+                    <label>
+                        <input required="" placeholder="" type="email" class="input" id="emailRegister">
                         <span>College Email</span>
                     </label>
 
                     <label>
-                        <input required="" placeholder="" type="password" class="input" id="password1">
+                        <input required="" placeholder="" type="password" class="input" id="password1Register">
                         <span>Password</span>
                     </label>
                     <label>
-                        <input required="" placeholder="" type="password" class="input" id="password2">
+                        <input required="" placeholder="" type="password" class="input" id="password2Register">
                         <span>Confirm password</span>
                     </label>
-                    <button type="submit" class="submit">Submit</button>
+                    <button type="submit" class="submit" id="register">Submit</button>
                     <p class="signin">
                         Already have an acount ?
                         <a href="#" onclick="changeToSignIn(event)">Signin</a>
@@ -79,9 +82,8 @@
 
         </div>
     </div>
-
     <script src="./script.js"></script>
-    <script src="firebase.js"></script>
+    <script type="module" src="firebase.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 

@@ -1,11 +1,5 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js'
-
-// If you enabled Analytics in your project, add the Firebase SDK for Google Analytics
 import { getAnalytics } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-analytics.js'
-
-// Add Firebase products that you want to use
-
-
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js'
 import { getFirestore, addDoc, collection, getDocs } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js'
 
@@ -48,47 +42,47 @@ document.getElementById("register").addEventListener("click", function (event) {
             console.log(errorMessage);
             alert(error);
         });
-});	  
+});
 
 
-document.getElementById("login").addEventListener("click", function(event) {
+document.getElementById("login").addEventListener("click", function (event) {
     event.preventDefault(); // Prevent form submission
-    var email =  document.getElementById("email").value;
+    var email = document.getElementById("email").value;
     var password = document.getElementById("password").value;
 
     signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      // Signed in 
-      const user = userCredential.user;
-      console.log(user);
-      alert(user.email+" Login successfully!!!");
-      document.getElementById('logout').style.display = 'block';
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log(errorMessage);
-      alert(errorMessage);
-    });		  		  
+        .then((userCredential) => {
+            // Signed in 
+            const user = userCredential.user;
+            console.log(user);
+            alert(user.email + " Login successfully!!!");
+            document.getElementById('logout').style.display = 'block';
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.log(errorMessage);
+            alert(errorMessage);
+        });
 });
 
-document.getElementById("logout").addEventListener("click", function(event) {
+document.getElementById("logout").addEventListener("click", function (event) {
     event.preventDefault();
     signOut(auth).then(() => {
         // Sign-out successful.
         console.log('Sign-out successful.');
         alert('Sign-out successful.');
         document.getElementById('logout').style.display = 'none';
-      }).catch((error) => {
+    }).catch((error) => {
         // An error happened.
         console.log('An error happened.');
-      });		  		  
+    });
 });
 
-document.getElementById("add").addEventListener("click", async function(event) {
+document.getElementById("add").addEventListener("click", async function (event) {
     event.preventDefault();
     try {
-        const collectionRef = collection(db, "data"); 
+        const collectionRef = collection(db, "data");
         const docRef = await addDoc(collectionRef, {
             Name: document.getElementById('addName').value,
             Phno: document.getElementById('addNumber').value
