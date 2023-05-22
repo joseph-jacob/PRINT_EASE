@@ -2,7 +2,6 @@ import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.0/firebas
 import { getAnalytics } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-analytics.js'
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js'
 import { getFirestore, addDoc, collection, getDocs } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js'
-
 const firebaseConfig = {
   apiKey: "AIzaSyBCtvK5bUFqSRGWYTVXnNLHsSdSMMfyEdQ",
   authDomain: "printease-875ad.firebaseapp.com",
@@ -12,7 +11,6 @@ const firebaseConfig = {
   appId: "1:903339769147:web:cd509e3189d24e59ad8b1e",
   measurementId: "G-L1DX6GPNRG"
 };
-
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
@@ -46,7 +44,6 @@ document.getElementById("login").addEventListener("click", function (event) {
       alert(errorMessage);
     });
 });
-
 // For new registration
 document.getElementById("register").addEventListener("click", async function (event) {
   event.preventDefault(); // Prevent form submission
@@ -85,7 +82,6 @@ document.getElementById("register").addEventListener("click", async function (ev
         console.error(error);
         alert("Error adding document");
       }
-
     })
     .catch((error) => {
       const errorCode = error.code;
@@ -98,8 +94,6 @@ document.getElementById("register").addEventListener("click", async function (ev
 
   // Additional validation or form submission logic can be added here
 });
-
-
 document.getElementById("forget").addEventListener("click", function (event) {
   event.preventDefault();
   var email = document.getElementById("emailForget").value;
@@ -135,5 +129,3 @@ function validatePassword(password1, password2) {
     return false; // Passwords do not match
   }
 }
-
-
