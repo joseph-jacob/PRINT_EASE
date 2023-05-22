@@ -1,8 +1,7 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js'
 import { getAnalytics } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-analytics.js'
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js'
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail,} from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js'
 import { getFirestore, addDoc, collection, getDocs } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js'
-
 const firebaseConfig = {
     apiKey: "AIzaSyBCtvK5bUFqSRGWYTVXnNLHsSdSMMfyEdQ",
     authDomain: "printease-875ad.firebaseapp.com",
@@ -79,6 +78,22 @@ document.getElementById("logout").addEventListener("click", function (event) {
     });
 });
 
+document.getElementById("forget").addEventListener("click", function (event) {
+    event.preventDefault();
+    var email = document.getElementById("email").value;
+
+    // Send password reset email
+    sendPasswordResetEmail(auth,email)
+        .then(() => {
+            console.log("Password reset email sent!");
+        })
+        .catch((error) => {
+            console.log("Error sending password reset email:", error);
+        });
+
+});
+
+
 document.getElementById("add").addEventListener("click", async function (event) {
     event.preventDefault();
     try {
@@ -105,3 +120,5 @@ window.onload = async function () {
     });
 }
 
+//forget password
+// Function to handle password reset

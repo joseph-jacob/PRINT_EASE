@@ -37,6 +37,10 @@
                         No account?
                         <a href="" id="signUpC" onclick="changeToSignUp(event)">Sign up</a>
                     </p>
+                    <p class="signup-link">
+                        Forget password?
+                        <a href="" id="reset" onclick="changeToReset(event)">Reset</a>
+                    </p>
                 </form>
             </div>
             <div id="signup" style="display: none;">
@@ -76,6 +80,17 @@
                         Already have an acount ?
                         <a href="#" onclick="changeToSignIn(event)">Signin</a>
                     </p>
+                </form>
+            </div>
+            <div id="resetForm" style="display: none;">
+                <form class="form">
+                    <p class="title">Reset password </p>
+                    <p class="message">Reset your password using email.</p>
+                        <label>
+                            <input required="" placeholder="" type="email" class="input" id="emailForget">
+                            <span>email</span>
+                        </label>
+                    <button type="submit" class="submit" id="forget">Sent</button>
                 </form>
             </div>
 

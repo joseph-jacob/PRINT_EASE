@@ -1,6 +1,6 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js'
 import { getAnalytics } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-analytics.js'
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js'
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js'
 import { getFirestore, addDoc, collection, getDocs } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js'
 
 const firebaseConfig = {
@@ -99,6 +99,25 @@ document.getElementById("register").addEventListener("click", async function (ev
   // Additional validation or form submission logic can be added here
 });
 
+
+document.getElementById("forget").addEventListener("click", function (event) {
+  event.preventDefault();
+  var email = document.getElementById("emailForget").value;
+  if (!validateEmail(email)) {
+    return;
+  }
+  // Send password reset email
+  sendPasswordResetEmail(auth, email)
+    .then(() => {
+      alert("Password reset email sent!");
+    })
+    .catch((error) => {
+      alert("Error sending password reset email:", error);
+    });
+
+});
+
+
 function validateEmail(email) {
   var requiredString = ".sjcetpalai.ac.in";
   if (email.endsWith(requiredString)) {
@@ -117,28 +136,4 @@ function validatePassword(password1, password2) {
   }
 }
 
-
-function changeToSignUp(event) {
-  event.preventDefault(); // Prevent default behavior of the link
-
-  var signinForm = document.getElementById("signin");
-  var signupForm = document.getElementById("signup");
-
-  if (signinForm && signupForm) {
-      signinForm.style.display = "none";
-      signupForm.style.display = "block";
-  }
-}
-
-function changeToSignIn(event) {
-  event.preventDefault(); // Prevent default behavior of the link
-
-  var signinForm = document.getElementById("signin");
-  var signupForm = document.getElementById("signup");
-
-  if (signinForm && signupForm) {
-      signinForm.style.display = "block";
-      signupForm.style.display = "none";
-  }
-}
 
