@@ -17,25 +17,27 @@ const analytics = getAnalytics(app);
 const auth = getAuth();
 const db = getFirestore();
 console.log(app)
-
 document.getElementById("login").addEventListener("click", function (event) {
   event.preventDefault(); // Prevent form submission
   var email = document.getElementById("emailLogin").value;
   var password = document.getElementById("passwordLogin").value;
-
   if (!validateEmail(email)) {
     return;
   }
-
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       // Signed in successfully
       const user = userCredential.user;
       console.log(user);
       //alert(user.email + " Login successful!");
-
       // Redirect to the desired page
-      window.location.href = "./student/index.html";
+      //window.location.href = "./student/index.html";
+      if(user.uid=='5w3QtqWjjSOazqmwX7teQEEPB6k2'){
+        window.location.href = "./test/index.html";
+      }
+      else{
+        window.location.href = "./student/index.html";
+      }
     })
     .catch((error) => {
       const errorCode = error.code;
@@ -53,7 +55,6 @@ document.getElementById("register").addEventListener("click", async function (ev
   var department = document.getElementById("departmentRegister").value;
   var phno = document.getElementById("phnoRegister").value;
   var password2 = document.getElementById("password2Register").value;
-  var temp = 0;
   if (!validateEmail(email)) {
     return;
   }
@@ -66,7 +67,6 @@ document.getElementById("register").addEventListener("click", async function (ev
       const user = userCredential.user;
       console.log(user);
       alert("Registration successfully!!");
-
       try {
         const collectionRef = collection(db, "user");
         const docRef = await addDoc(collectionRef, {

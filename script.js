@@ -12,7 +12,6 @@ function changeToSignUp(event) {
 
 function changeToSignIn(event) {
     event.preventDefault(); // Prevent default behavior of the link
-
     var signinForm = document.getElementById("signin");
     var signupForm = document.getElementById("signup");
 
@@ -26,7 +25,6 @@ function changeToReset(event) {
 
     var signinForm = document.getElementById("signin");
     var reset = document.getElementById("reset");
-
     if (signinForm && reset) {
         signinForm.style.display = "none";
         resetForm.style.display = "block";
