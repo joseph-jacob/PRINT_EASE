@@ -33,7 +33,7 @@ document.getElementById("login").addEventListener("click", function (event) {
       // Redirect to the desired page
       //window.location.href = "./student/index.html";
       if(user.uid=='5w3QtqWjjSOazqmwX7teQEEPB6k2'){
-        window.location.href = "./test/index.html";
+        window.location.href = "./staff/index.html";
       }
       else{
         window.location.href = "./student/index.html";
