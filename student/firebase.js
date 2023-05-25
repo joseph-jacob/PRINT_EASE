@@ -1,6 +1,6 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js';
 import { getAuth } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js';
-import { getFirestore, collection, getDocs } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js';
+import { getFirestore, collection, getDocs,where } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js';
 import { getStorage, ref, getDownloadURL } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-storage.js';
 const firebaseConfig = {
     apiKey: "AIzaSyBCtvK5bUFqSRGWYTVXnNLHsSdSMMfyEdQ",
@@ -20,9 +20,10 @@ const storage = getStorage();
 
 auth.onAuthStateChanged(async function(user) {
     if (user) {
+      console.log(user.uid)
         // Retrieve data from Firestore
         const collectionRef = collection(db, 'data');
-        const querySnapshot = await getDocs(collectionRef);
+        const querySnapshot = await getDocs(collectionRef, where('uid', '==', user.uid));
   
         // Get the container element where the cards will be displayed
         const cardContainer = document.getElementById('card-container');
@@ -56,7 +57,9 @@ auth.onAuthStateChanged(async function(user) {
             <object data="${downloadURL}" type="application/pdf"></object>
             <strong>${data.FName}</strong>
             <span>Price :- </span><span>${data.Fprice}</span> <br>
-            <span>Date :- </span> <span>${data.Date}</span>
+            <span>Date :- </span> <span>${data.Date}</span><br>
+          <a href=${downloadURL}><img src="../../images/open.gif" alt="Your GIF"></object></a>
+
           `;
   
           // Append the card content to the box

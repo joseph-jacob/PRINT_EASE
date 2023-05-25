@@ -178,3 +178,7 @@ button:hover::before {
 .button-wrapper button {
     margin-left: 1rem;
 }
+img{
+    max-width: 30px;
+    max-height: 30px;
+}
