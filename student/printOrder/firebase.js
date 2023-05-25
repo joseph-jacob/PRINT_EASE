@@ -79,8 +79,8 @@ auth.onAuthStateChanged(function (user) {
     let mediaRecorder;
     let chunks = [];
     let stream;
-    let audioPlayer = document.getElementById('audio-player');
-    let audioUrl = "nil"
+    let audioPlayer = document.getElementById("audio-player");
+    let audioUrl = ''
 
     document.getElementById("start").addEventListener('click', function (event) {
       navigator.mediaDevices.getUserMedia({ audio: true })
@@ -99,15 +99,16 @@ auth.onAuthStateChanged(function (user) {
           console.error('Error accessing microphone:', error);
         });
     });
-
     document.getElementById("stop").addEventListener('click', function (event) {
       if (mediaRecorder && mediaRecorder.state !== 'inactive') {
         mediaRecorder.stop();
         mediaRecorder.addEventListener('stop', function () {
           const audioBlob = new Blob(chunks, { type: 'audio/webm' });
           audioUrl = URL.createObjectURL(audioBlob);
+          console.log(audioPlayer)
+
           audioPlayer.src = audioUrl;
-          //audioPlayer.play();
+          audioPlayer.play(); // Uncomment this line to play the recorded audio automatically
           console.log('Recording stopped');
           document.getElementById("start").disabled = false;
           console.log('Audio URL:', audioUrl);
