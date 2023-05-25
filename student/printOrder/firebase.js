@@ -203,6 +203,8 @@ auth.onAuthStateChanged(function (user) {
       event.preventDefault(); // Prevent form submission
       caluculatePrice();
       uDate();
+      let status = "Pending";
+      console(status);
       console.log(type);
       console.log(mode);
       console.log(side);
@@ -240,7 +242,8 @@ auth.onAuthStateChanged(function (user) {
           Fmethod: method,
           Faudio: audioRef.fullPath,
           Fprice: price,
-          Date: date
+          Date: date,
+          Fstatus: status
         });
         console.log("Document written with ID: ", docRef.id);
         alert("Order has Placed");

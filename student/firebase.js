@@ -55,8 +55,9 @@ auth.onAuthStateChanged(async function (user) {
       cardContent.innerHTML = `
         <object data="${downloadURL}" type="application/pdf"></object>
         <strong>${data.FName}</strong>
-        <span>Price: ${data.Fprice}</span><br>
-        <span>Date: ${data.Date}</span><br>
+        <span>Price : ${data.Fprice}</span><br>
+        <span>Date  : ${data.Date}</span><br>
+        <span>Status: ${data.Fstatus}</span><br>
         <a href="${downloadURL}"><img src="../../images/open.gif" alt="Your GIF"></a>
       `;
 
