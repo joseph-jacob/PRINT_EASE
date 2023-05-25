@@ -1,18 +1,13 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home_PRINTEASE</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
 </head>
-
 <body>
     <div class="topnav">
         <a href="#home">Home</a>
@@ -24,72 +19,8 @@
         <h1 style="text-align: center; font-family: poppins; margin: 0 auto;">Orders</h1>
         <a href="./printOrder/index.html"><button>Place Order</button></a>
     </div>
-    <div class="container1">
-        <div class="container">
-            <div class="box">
-                <div>
-                    <object data="./temp/NW Print-1.pdf" type="application/pdf"></object>
-                    <strong>JOE WATSON SBF</strong>
-                    <p>0000 000 000 0000</p>
-                    <span>VALID</span> <span>01/28</span>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="box">
-                <div>
-                    <object data="./temp/NW Print-1.pdf" type="application/pdf"></object>
-                    <strong>JOE WATSON SBF</strong>
-                    <p>0000 000 000 0000</p>
-                    <span>VALID</span> <span>01/28</span>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="box">
-                <div>
-                    <object data="./temp/NW Print-1.pdf" type="application/pdf"></object>
-                    <strong>JOE WATSON SBF</strong>
-                    <p>0000 000 000 0000</p>
-                    <span>VALID</span> <span>01/28</span>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="box">
-                <div>
-                    <object data="./temp/NW Print-1.pdf" type="application/pdf"></object>
-                    <strong>JOE WATSON SBF</strong>
-                    <p>0000 000 000 0000</p>
-                    <span>VALID</span> <span>01/28</span>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="box">
-                <div>
-                    <object data="./temp/NW Print-1.pdf" type="application/pdf"></object>
-                    <strong>JOE WATSON SBF</strong>
-                    <p>0000 000 000 0000</p>
-                    <span>VALID</span> <span>01/28</span>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="box">
-                <div>
-                    <object data="./temp/design team.png" type="application/pdf"></object>
-                    <strong>JOE WATSON SBF</strong>
-                    <p>0000 000 000 0000</p>
-                    <span>VALID</span> <span>01/28</span>
-                </div>
-            </div>
-        </div>
-    </div>
+    <div class="container1" id="card-container"></div>
 
-
-    </div>
-
+    <script type="module" src="./firebase.js"></script>
 </body>
-
 </html>

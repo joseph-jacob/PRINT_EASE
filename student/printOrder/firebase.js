@@ -20,6 +20,7 @@ const auth = getAuth();
 const db = getFirestore();
 const storage = getStorage(app);
 
+
 auth.onAuthStateChanged(function (user) {
   if (user) {
     const radio1 = document.querySelector('.radio1');
@@ -252,7 +253,7 @@ auth.onAuthStateChanged(function (user) {
 
   } else {
     // The user is not signed in.
-    window.location.href = "login.html";
+    window.location.href = "../../login.html";
   }
 });
 
