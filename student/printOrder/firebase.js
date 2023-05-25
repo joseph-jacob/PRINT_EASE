@@ -92,11 +92,12 @@ auth.onAuthStateChanged(function (user) {
           });
           mediaRecorder.start();
           console.log('Recording started');
-          document.getElementById("stop").disabled = false;
-          document.getElementById("start").disabled = true;
+          document.getElementById("stop").style.display="block";
+          document.getElementById("start").style.display="none";
+          document.getElementById("text").textContent="Recording : ";
         })
         .catch(function (error) {
-          console.error('Error accessing microphone:', error);
+          console.error('Error accessing microphone : ', error);
         });
     });
     document.getElementById("stop").addEventListener('click', function (event) {
@@ -106,13 +107,14 @@ auth.onAuthStateChanged(function (user) {
           const audioBlob = new Blob(chunks, { type: 'audio/webm' });
           audioUrl = URL.createObjectURL(audioBlob);
           console.log(audioPlayer)
-
           audioPlayer.src = audioUrl;
-          audioPlayer.play(); // Uncomment this line to play the recorded audio automatically
+          //audioPlayer.play(); // Uncomment this line to play the recorded audio automatically
           console.log('Recording stopped');
-          document.getElementById("start").disabled = false;
+          document.getElementById("start").style.display="block";
           console.log('Audio URL:', audioUrl);
           document.getElementById("audio-player").style.display = "block";
+          document.getElementById("stop").style.display="none";
+          document.getElementById("text").textContent="To Change recording : ";
           // Do something with the recorded audio data (e.g., upload to Firebase)
         });
       }
@@ -218,7 +220,6 @@ auth.onAuthStateChanged(function (user) {
       event.preventDefault();
       try {
         const collectionRef = collection(db, "data");
-
         // Upload PDF file
         const fileInput = document.getElementById('file-upload');
         const pdfFile = fileInput.files[0];
