@@ -1,13 +1,13 @@
-function displayFileName() {
-  const fileInput = document.getElementById('file-upload');
-  const fileName = document.getElementById('file-name');
-  const labelUpload = document.getElementById('label-upload');
-  if (fileInput.files.length > 0) {
-    labelUpload.textContent = fileInput.files[0].name;
-  } else {
-    fileName.textContent = '';
-  }
-}
+// function displayFileName() {
+//   const fileInput = document.getElementById('file-upload');
+//   const fileName = document.getElementById('file-name');
+//   const labelUpload = document.getElementById('label-upload');
+//   if (fileInput.files.length > 0) {
+//     labelUpload.textContent = fileInput.files[0].name;
+//   } else {
+//     fileName.textContent = '';
+//   }
+// }
 
 // var recognition = new webkitSpeechRecognition();
 // recognition.lang = 'en-US';
