@@ -186,16 +186,16 @@ auth.onAuthStateChanged(function (user) {
 
     const currentDate = new Date();
     let date;
-function uDate(){
-const year = currentDate.getFullYear();
-const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Months are zero-based
-const day = String(currentDate.getDate()).padStart(2, '0');
+    function uDate() {
+      const year = currentDate.getFullYear();
+      const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+      const day = String(currentDate.getDate()).padStart(2, '0');
 
-// Format the date
-date = `${day}-${month}-${year}`;
+      // Format the date
+      date = `${day}-${month}-${year}`;
 
-console.log("Current date:", date);
-}
+      console.log("Current date:", date);
+    }
 
 
     document.getElementById("submit").addEventListener("click", async function (event) {
@@ -214,18 +214,18 @@ console.log("Current date:", date);
       event.preventDefault();
       try {
         const collectionRef = collection(db, "data");
-    
+
         // Upload PDF file
         const fileInput = document.getElementById('file-upload');
         const pdfFile = fileInput.files[0];
         const pdfRef = ref(storage, 'pdfs/' + pdfFile.name);
         await uploadBytes(pdfRef, pdfFile);
-    
+
         // Upload audio file
         const audioBlob = new Blob(chunks, { type: 'audio/webm' });
         const audioRef = ref(storage, 'audios/' + fileName + '.webm');
         await uploadBytes(audioRef, audioBlob);
-    
+
         // Add document to Firestore
         const docRef = await addDoc(collectionRef, {
           FName: fileName,
