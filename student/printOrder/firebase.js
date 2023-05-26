@@ -188,24 +188,32 @@ auth.onAuthStateChanged(function (user) {
       }
     }
 
-    const currentDate = new Date();
-    let date;
-    function uDate() {
+    let date; 
+    let time;
+    let dateTimeU;
+    function dateTime() {
+      const currentDate = new Date();
+      const currentTime = new Date();
       const year = currentDate.getFullYear();
       const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Months are zero-based
       const day = String(currentDate.getDate()).padStart(2, '0');
-
+      const hours = currentTime.getHours();
+      const minutes = currentTime.getMinutes();
+      const seconds = currentTime.getSeconds();
       // Format the date
       date = `${day}-${month}-${year}`;
-
+      time = `${hours}-${minutes}-${seconds}`
+      dateTimeU=`${date}/${time}`
       console.log("Current date:", date);
+      console.log(time);
+
     }
 
 
     document.getElementById("submit").addEventListener("click", async function (event) {
       event.preventDefault(); // Prevent form submission
       caluculatePrice();
-      uDate();
+      dateTime();
       let status = "Pending";
       console.log(status);
       console.log(type);
@@ -245,7 +253,10 @@ auth.onAuthStateChanged(function (user) {
           Faudio: audioRef.fullPath,
           Fprice: price,
           Date: date,
-          Fstatus: status
+          Fstatus: status,
+          email : user.email,
+          time : time,
+          timestamp : dateTimeU
         });
         console.log("Document written with ID: ", docRef.id);
         alert("Order has Placed");
