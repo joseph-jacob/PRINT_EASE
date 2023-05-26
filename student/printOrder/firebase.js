@@ -207,7 +207,7 @@ auth.onAuthStateChanged(function (user) {
       caluculatePrice();
       uDate();
       let status = "Pending";
-      console(status);
+      console.log(status);
       console.log(type);
       console.log(mode);
       console.log(side);

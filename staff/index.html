@@ -1,66 +1,44 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>PrintEase - Order history</title>
-	<link rel="stylesheet" href="style1.css"
-	
-	
+    <title>PrintEase - Order history</title>
+    <link rel="stylesheet" href="./style.css"> 
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 </head>
-<body class="bgimage" >
-	<div class="topnav">
-			<a  href="#home">Home</a>
-			<a class="active"href="#news">Orders</a>
-			<a href="#contact">Contact</a>
-			<a href="#about">About</a>
-		  </div>
-		  <div></div>
-		  <div></div>
-		  <div></div>
-	
-	<h1 style="text-align:center;"style="font-family:poppins;">Order history</h1>
-   
-	<div class="container">
-		<div class="card">
-			<div class="card-header">Job ID: 1</div>
-			<div class="card-content">
-				<p>Customer Name: John Doe</p>
-				<p>Printed On: 2023-04-21</p>
-				<p>Status: Completed</p>
-				<p><a href="printed_document_1.pdf" class="card-link" target="_blank">View Document</a></p>
-			</div>
-		</div>
-		
-
-		<div class="card">
-			<div class="card-header">Job ID: 2</div>
-			<div class="card-content">
-				<p>Customer Name: Jane Smith</p>
-				<p>Printed On: 2023-04-20</p>
-				<p>Status: Completed</p>
-				<p><a href="printed_document_2.pdf" class="card-link" target="_blank">View Document</a></p>
-			</div>
-		</div>
-
-		<div class="card">
-			
-			<div class="card-header">Job ID: 3</div>
-			<div class="card-content">
-				<p>Customer Name: Alice Johnson</p>
-				<p>Printed On: 2023-04-19</p>
-				<p>Status: Completed</p>
-				<p><a href="printed_document_3.pdf" class="card-link" target="_blank">View Document</a></p>
-			</div>
-		</div>
-
-		<div class="card">
-			<div class="card-header">Job ID: 4</div>
-			<div class="card-content">
-				<p>Customer Name: Bob Thompson</p>
-				<p>Printed On: 2023-04-18</p>
-				<p>Status: Completed</p>
-				<p><a href="printed_document_4.pdf" class="card-link" target="_blank">View Document</a></p>
-			</div>
-		</div>
-	</div>
+<body class="bgimage">
+    <div class="topnav">
+        <a href="#home">Home</a>
+        <a class="active" href="#news">Orders</a>
+        <a href="#contact">Contact</a>
+        <a href="#about">About</a>
+    </div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <h1 style="text-align:center;" style="font-family:poppins;">Order history</h1>
+    
+    <table class="table table-bordered"">
+        <thead>
+          <tr>
+            <th scope="col">No</th>
+            <th scope="col">User Name</th>
+            <th scope="col">File Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Payment Mode</th>
+            <th scope="col">Date</th>
+            <th scope="col">No. of copies</th>
+            <th scope="col">CLR OR B&W</th>
+            <th scope="col">Single</th>
+            <th scope="col">Audio</th>
+            <th scope="col">Status</th>
+            <th scope="col">Print</th>
+          </tr>
+        </thead>
+        <tbody class="table-group-divider" id="tbody">
+        </tbody>
+      </table>
 </body>
+<script type="module"  src="./firebase.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 </html>
+</a>
