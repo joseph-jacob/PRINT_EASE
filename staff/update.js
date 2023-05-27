@@ -21,8 +21,11 @@ const db = getFirestore();
 const storage = getStorage(app);
 var docId = sessionStorage.getItem("documentId")
 console.log(docId)
-var pdfDownloadURL= sessionStorage.getItem("pdfDownloadURL")
+var pdfDownloadURL = sessionStorage.getItem("pdfDownloadURL")
 const documentRef = doc(db, 'data', docId);
 await updateDoc(documentRef, { Fstatus: "Done" });
 console.log("set");
 window.location.href = pdfDownloadURL;
+
+
+
