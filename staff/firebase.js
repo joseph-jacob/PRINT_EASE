@@ -24,7 +24,6 @@ const db = getFirestore();
 const storage = getStorage(app);
 auth.onAuthStateChanged(async function (user) {
   if (user) {
-    console.log(app);
     const dataCollectionRef = collection(db, "data");
     const querySnapshot = await getDocs(query(dataCollectionRef, orderBy("timestamp")));
     let count = 1;
@@ -46,7 +45,7 @@ auth.onAuthStateChanged(async function (user) {
       row.insertCell(4).innerHTML = doc.data().Fmethod;
       row.insertCell(5).innerHTML = doc.data().Date;
       row.insertCell(6).innerHTML = doc.data().Fcount;
-      row.insertCell(7).innerHTML = doc.data().Ftype;
+      row.insertCell(7).innerHTML = doc.data().FType;
       row.insertCell(8).innerHTML = doc.data().Fside;
       row.insertCell(9).innerHTML = `<audio src="${audioDownloadURL}" controls></audio>`;
       row.insertCell(10).innerHTML = doc.data().Fstatus;
@@ -54,8 +53,6 @@ auth.onAuthStateChanged(async function (user) {
       count++;
 
       
-      
-      console.log(docId);
       var done = "Done";
       const imageElement = row.cells[11].querySelector("img");
       imageElement.onclick = async function () {
