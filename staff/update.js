@@ -27,5 +27,3 @@ await updateDoc(documentRef, { Fstatus: "Done" });
 console.log("set");
 window.location.href = pdfDownloadURL;
 
-
-
