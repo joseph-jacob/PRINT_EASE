@@ -113,7 +113,7 @@ document.getElementById("forget").addEventListener("click", function (event) {
 
 
 function validateEmail(email) {
-  var requiredString = ".sjcetpalai.ac.in";
+  var requiredString = "sjcetpalai.ac.in";
   if (email.endsWith(requiredString)) {
     return true; // Email ends with the required string
   } else {
