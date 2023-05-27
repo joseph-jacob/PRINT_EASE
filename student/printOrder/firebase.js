@@ -123,7 +123,6 @@ auth.onAuthStateChanged(function (user) {
     let fileName;
     let fileInput;
     var pageCount;
-
     document.getElementById("file-upload").addEventListener('change', function (event) {
       fileInput = document.getElementById('file-upload');
       const labelUpload = document.getElementById('label-upload');
@@ -133,6 +132,7 @@ auth.onAuthStateChanged(function (user) {
         labelUpload.textContent = '';
       }
       fileName = fileInput.files[0].name;
+      document.querySelector(".button_wrapper").style.display="block";
     });
 
     var script = document.createElement('script');
@@ -173,15 +173,15 @@ auth.onAuthStateChanged(function (user) {
       if (pageCount > 0) {
         if (type == 'B & W') {
           if (side == 'Single') {
-            price = pageCount * 1;
+            price = pageCount * 1.25;
           } else {
-            price = pageCount * 0.75;
+            price = pageCount * 1;
           }
         } else {
           if (side == 'Single') {
-            price = pageCount * 5;
+            price = pageCount * 10;
           } else {
-            price = pageCount * 2;
+            price = pageCount * 10;
           }
         }
         price *= count;
@@ -275,3 +275,13 @@ auth.onAuthStateChanged(function (user) {
 
 
 
+const buttonWrapper = document.querySelector(".button_wrapper");
+buttonWrapper.addEventListener("click", () => {
+	if (!buttonWrapper.classList.contains("loading")) {
+		buttonWrapper.classList.add("loading");
+		setTimeout(() => {
+			buttonWrapper.classList.add("done");
+			setTimeout(() => buttonWrapper.classList.remove("loading", "done"), 1500);
+		}, 2400);
+	}
+});

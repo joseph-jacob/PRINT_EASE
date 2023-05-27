@@ -46,6 +46,7 @@
               <span>Landscape</span>
             </label>
           </form>
+          <div id="radio3">
           <form class="radio3">
             <label class="r5">
               <input type="radio" name="radio" checked="" Value="Single">
@@ -56,6 +57,7 @@
               <span>Double side</span>
             </label>
           </form>
+        </div>
         </div>
       </div>
       <div class="counter-h">
@@ -99,7 +101,12 @@
           <span id="file-name"></span><span id="file-name"></span>
         </label>
         <input type="file" id="file-upload" accept=".pdf" required>
-        <button class="shadow__btn" id="submit">Upload</button>
+        <div class="button_wrapper" id="submit">
+          <div class="button">
+            <span>Processing</span>
+            <div class="progress_bar"></div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
