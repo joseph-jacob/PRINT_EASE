@@ -80,7 +80,7 @@ auth.onAuthStateChanged(function (user) {
     let chunks = [];
     let stream;
     let audioPlayer = document.getElementById("audio-player");
-    let audioUrl = ''
+    let audioUrl = 'null'
 
     document.getElementById("start").addEventListener('click', function (event) {
       navigator.mediaDevices.getUserMedia({ audio: true })
@@ -197,7 +197,7 @@ auth.onAuthStateChanged(function (user) {
       const year = currentDate.getFullYear();
       const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Months are zero-based
       const day = String(currentDate.getDate()).padStart(2, '0');
-      const hours = currentTime.getHours();
+      const hours = String(currentTime.getHours()+1).padStart(2,'0');
       const minutes = currentTime.getMinutes();
       const seconds = currentTime.getSeconds();
       // Format the date
@@ -259,7 +259,7 @@ auth.onAuthStateChanged(function (user) {
           timestamp : dateTimeU
         });
         console.log("Document written with ID: ", docRef.id);
-        alert("Order has Placed");
+        alert("Order has Placed\n You have to pay RS"+price+" /-");
         window.location.href = "../index.html";
       } catch (error) {
         console.error(error);
@@ -272,8 +272,6 @@ auth.onAuthStateChanged(function (user) {
     window.location.href = "../../login.html";
   }
 });
-
-
 
 const buttonWrapper = document.querySelector(".button_wrapper");
 buttonWrapper.addEventListener("click", () => {

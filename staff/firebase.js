@@ -30,12 +30,14 @@ auth.onAuthStateChanged(async function (user) {
     console.log(querySnapshot)
     for (const doc of querySnapshot.docs) {
       const pdfRef = ref(storage, doc.data().File);
+      console.log(doc.data().Faudio)
       const audioRef = ref(storage, doc.data().Faudio);
       const docId=doc.id;
       
       // Access the 'Name' property from the document data
       const pdfDownloadURL = await getDownloadURL(pdfRef);
       const audioDownloadURL = await getDownloadURL(audioRef);
+
       
       const row = document.getElementById("tbody").insertRow(0);
       row.insertCell(0).innerHTML = count;
