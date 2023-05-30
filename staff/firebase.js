@@ -60,6 +60,10 @@ auth.onAuthStateChanged(async function (user) {
       imageElement.onclick = async function () {
         sessionStorage.setItem("documentId",docId);
         sessionStorage.setItem("pdfDownloadURL",pdfDownloadURL);
+        sessionStorage.setItem("email",doc.data().email);
+        sessionStorage.setItem("Fname",doc.data().FName);
+        sessionStorage.setItem("price",doc.data().Fprice);
+
         window.location.href = "./update.html";
         //window.location.href = pdfDownloadURL;
       }

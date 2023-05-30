@@ -2,6 +2,7 @@ import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.0/firebas
 import { getAnalytics } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-analytics.js';
 import { getAuth } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js';
 import { getFirestore, collection, doc, getDocs, updateDoc, query, orderBy } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js';
+
 import { getStorage, ref, getDownloadURL } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-storage.js';
 const firebaseConfig = {
     apiKey: "AIzaSyBCtvK5bUFqSRGWYTVXnNLHsSdSMMfyEdQ",
@@ -25,5 +26,4 @@ var pdfDownloadURL = sessionStorage.getItem("pdfDownloadURL")
 const documentRef = doc(db, 'data', docId);
 await updateDoc(documentRef, { Fstatus: "Done" });
 console.log("set");
-window.location.href = pdfDownloadURL;
-
+window.location.href = "./email.html";
