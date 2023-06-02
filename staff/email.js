@@ -14,7 +14,7 @@ const templateID = "template_cci5hjr";
 emailjs.send(serviceID, templateID, params).then(
 function (response) {
   console.log("SUCCESS!", response.status, response.text);
-  alert("Your message has been sent successfully!");
+  window.location.href = pdfDownloadURL;
 },
 function (error) {
   console.log("FAILED...", error);
@@ -22,4 +22,3 @@ function (error) {
 }
 );
 
-window.location.href = pdfDownloadURL;
