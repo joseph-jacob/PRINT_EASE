@@ -92,9 +92,9 @@ auth.onAuthStateChanged(function (user) {
           });
           mediaRecorder.start();
           console.log('Recording started');
-          document.getElementById("stop").style.display="block";
-          document.getElementById("start").style.display="none";
-          document.getElementById("text").textContent="Recording : ";
+          document.getElementById("stop").style.display = "block";
+          document.getElementById("start").style.display = "none";
+          document.getElementById("text").textContent = "Recording : ";
         })
         .catch(function (error) {
           console.error('Error accessing microphone : ', error);
@@ -110,12 +110,11 @@ auth.onAuthStateChanged(function (user) {
           audioPlayer.src = audioUrl;
           //audioPlayer.play(); // Uncomment this line to play the recorded audio automatically
           console.log('Recording stopped');
-          document.getElementById("start").style.display="block";
+          document.getElementById("start").style.display = "block";
           console.log('Audio URL:', audioUrl);
           document.getElementById("audio-player").style.display = "block";
-          document.getElementById("stop").style.display="none";
-          document.getElementById("text").textContent="To Change recording : ";
-          // Do something with the recorded audio data (e.g., upload to Firebase)
+          document.getElementById("stop").style.display = "none";
+          document.getElementById("text").textContent = "To Change recording : ";
         });
       }
     });
@@ -132,7 +131,7 @@ auth.onAuthStateChanged(function (user) {
         labelUpload.textContent = '';
       }
       fileName = fileInput.files[0].name;
-      document.querySelector(".button_wrapper").style.display="block";
+      document.querySelector(".button_wrapper").style.display = "block";
     });
 
     var script = document.createElement('script');
@@ -188,7 +187,7 @@ auth.onAuthStateChanged(function (user) {
       }
     }
 
-    let date; 
+    let date;
     let time;
     let dateTimeU;
     function dateTime() {
@@ -197,13 +196,13 @@ auth.onAuthStateChanged(function (user) {
       const year = currentDate.getFullYear();
       const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Months are zero-based
       const day = String(currentDate.getDate()).padStart(2, '0');
-      const hours = String(currentTime.getHours()+1).padStart(2,'0');
+      const hours = String(currentTime.getHours() + 1).padStart(2, '0');
       const minutes = currentTime.getMinutes();
       const seconds = currentTime.getSeconds();
       // Format the date
-      date = `${day}-${month}-${year}`;
+      date = `${year}-${month}-${day}`;
       time = `${hours}-${minutes}-${seconds}`
-      dateTimeU=`${date}/${time}`
+      dateTimeU = `${date}/${time}`
       console.log("Current date:", date);
       console.log(time);
 
@@ -226,60 +225,69 @@ auth.onAuthStateChanged(function (user) {
       console.log(pageCount);
       console.log(price);
       event.preventDefault();
-      try {
-        const collectionRef = collection(db, "data");
-        // Upload PDF file
-        const fileInput = document.getElementById('file-upload');
-        const pdfFile = fileInput.files[0];
-        const pdfRef = ref(storage, 'pdfs/' + pdfFile.name);
-        await uploadBytes(pdfRef, pdfFile);
+      let result = window.confirm("Are you sure to place this order\nYou have to pay RS " + price + " /-")
+      if (result === true) {
+        try {
+          const collectionRef = collection(db, "data");
+          // Upload PDF file
+          const fileInput = document.getElementById('file-upload');
+          const pdfFile = fileInput.files[0];
+          const pdfRef = ref(storage, 'pdfs/' + pdfFile.name);
+          await uploadBytes(pdfRef, pdfFile);
 
-        // Upload audio file
-        const audioBlob = new Blob(chunks, { type: 'audio/webm' });
-        const audioRef = ref(storage, 'audios/' + fileName + '.webm');
-        await uploadBytes(audioRef, audioBlob);
+          // Upload audio file
+          const audioBlob = new Blob(chunks, { type: 'audio/webm' });
+          const audioRef = ref(storage, 'audios/' + fileName + '.webm');
+          await uploadBytes(audioRef, audioBlob);
 
-        // Add document to Firestore
-        const docRef = await addDoc(collectionRef, {
-          FName: fileName,
-          uid: user.uid,
-          File: pdfRef.fullPath,
-          Fpage: pageCount,
-          FType: type,
-          Fmode: mode,
-          Fside: side,
-          Fcount: count,
-          Fmethod: method,
-          Faudio: audioRef.fullPath,
-          Fprice: price,
-          Date: date,
-          Fstatus: status,
-          email : user.email,
-          time : time,
-          timestamp : dateTimeU
-        });
-        console.log("Document written with ID: ", docRef.id);
-        alert("Order has Placed\n You have to pay RS"+price+" /-");
+          // Add document to Firestore
+          const docRef = await addDoc(collectionRef, {
+            FName: fileName,
+            uid: user.uid,
+            File: pdfRef.fullPath,
+            Fpage: pageCount,
+            FType: type,
+            Fmode: mode,
+            Fside: side,
+            Fcount: count,
+            Fmethod: method,
+            Faudio: audioRef.fullPath,
+            Fprice: price,
+            Date: date,
+            Fstatus: status,
+            email: user.email,
+            time: time,
+            timestamp: dateTimeU
+          });
+          if (method == 'Online') {
+            //sessionStorage.setItem("price")
+            window.location.href = "./online/index.html";
+          } else {
+            alert("Order has Placed");
+            window.location.href = "../index.html";
+          }
+        } catch (error) {
+          console.error(error);
+          alert("Error ordering");
+        }
+      }else{
         window.location.href = "../index.html";
-      } catch (error) {
-        console.error(error);
-        alert("Error ordering");
       }
-    });
+      });
 
-  } else {
-    // The user is not signed in.
-    window.location.href = "../../login.html";
-  }
+} else {
+  // The user is not signed in.
+  window.location.href = "../../login.html";
+}
 });
 
 const buttonWrapper = document.querySelector(".button_wrapper");
 buttonWrapper.addEventListener("click", () => {
-	if (!buttonWrapper.classList.contains("loading")) {
-		buttonWrapper.classList.add("loading");
-		setTimeout(() => {
-			buttonWrapper.classList.add("done");
-			setTimeout(() => buttonWrapper.classList.remove("loading", "done"), 1500);
-		}, 2400);
-	}
+  if (!buttonWrapper.classList.contains("loading")) {
+    buttonWrapper.classList.add("loading");
+    setTimeout(() => {
+      buttonWrapper.classList.add("done");
+      setTimeout(() => buttonWrapper.classList.remove("loading", "done"), 1500);
+    }, 2400);
+  }
 });

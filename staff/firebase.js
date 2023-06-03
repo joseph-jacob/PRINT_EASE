@@ -27,18 +27,16 @@ auth.onAuthStateChanged(async function (user) {
     const dataCollectionRef = collection(db, "data");
     const querySnapshot = await getDocs(query(dataCollectionRef, orderBy("timestamp")));
     let count = 1;
-    console.log(querySnapshot)
     for (const doc of querySnapshot.docs) {
       const pdfRef = ref(storage, doc.data().File);
-      console.log(doc.data().Faudio)
       const audioRef = ref(storage, doc.data().Faudio);
-      const docId=doc.id;
-      
+      const docId = doc.id;
+
       // Access the 'Name' property from the document data
       const pdfDownloadURL = await getDownloadURL(pdfRef);
       const audioDownloadURL = await getDownloadURL(audioRef);
 
-      
+
       const row = document.getElementById("tbody").insertRow(0);
       row.insertCell(0).innerHTML = count;
       row.insertCell(1).innerHTML = doc.data().email;
@@ -54,15 +52,15 @@ auth.onAuthStateChanged(async function (user) {
       row.insertCell(11).innerHTML = `<img src="../images/open.gif" alt="Your GIF"></a>`;
       count++;
 
-      
+
       var done = "Done";
       const imageElement = row.cells[11].querySelector("img");
       imageElement.onclick = async function () {
-        sessionStorage.setItem("documentId",docId);
-        sessionStorage.setItem("pdfDownloadURL",pdfDownloadURL);
-        sessionStorage.setItem("email",doc.data().email);
-        sessionStorage.setItem("Fname",doc.data().FName);
-        sessionStorage.setItem("price",doc.data().Fprice);
+        sessionStorage.setItem("documentId", docId);
+        sessionStorage.setItem("pdfDownloadURL", pdfDownloadURL);
+        sessionStorage.setItem("email", doc.data().email);
+        sessionStorage.setItem("Fname", doc.data().FName);
+        sessionStorage.setItem("price", doc.data().Fprice);
 
         window.location.href = "./update.html";
         //window.location.href = pdfDownloadURL;

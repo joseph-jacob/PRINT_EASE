@@ -7,6 +7,7 @@ body {
   background-size: cover;
   background-position: center;
   justify-content: center;
+  min-height: 150%;
 }
 
 .container {
