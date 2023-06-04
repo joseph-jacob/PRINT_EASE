@@ -58,7 +58,7 @@ auth.onAuthStateChanged(async function (user) {
         <span>Price : ${data.Fprice}</span><br>
         <span>Date  : ${data.Date}</span><br>
         <span>Status: ${data.Fstatus}</span><br>
-        <a href="${downloadURL}"><img src="../../images/open.gif" alt="Your GIF"></a>
+        <a href="${downloadURL}"><img class="book" src="../../images/open.gif" alt="Your GIF"></a>
       `;
 
       // Append the card content to the box

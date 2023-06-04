@@ -1,6 +1,6 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js'
 import { getAnalytics } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-analytics.js'
-import { getAuth, signOut ,sendPasswordResetEmail} from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js'
+import { getAuth ,sendPasswordResetEmail,signOut} from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js'
 import { getFirestore, query,where, collection, getDocs } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js'
 import { getStorage, ref, uploadBytes } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-storage.js'
 const firebaseConfig = {
@@ -56,4 +56,16 @@ auth.onAuthStateChanged(async function (user) {
         });
     
     });
+    document.getElementById("logout").addEventListener("click", function (event) {
+      event.preventDefault();
+      signOut(auth).then(() => {
+          // Sign-out successful.
+          console.log('Sign-out successful.');
+          alert('Sign-out successful.');
+          
+      }).catch((error) => {
+          // An error happened.
+          console.log('An error happened.');
+      });
+  });
   });

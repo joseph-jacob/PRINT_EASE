@@ -151,7 +151,7 @@ h1 {
 }
 
 .containers label input:checked+span {
-  background-color: #414181;
+  background-color:cornflowerblue;
   color: white;
 }
 

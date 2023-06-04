@@ -50,7 +50,7 @@ auth.onAuthStateChanged(async function (user) {
       row.insertCell(8).innerHTML = doc.data().Fside;
       row.insertCell(9).innerHTML = `<audio src="${audioDownloadURL}" controls></audio>`;
       row.insertCell(10).innerHTML = doc.data().Fstatus;
-      row.insertCell(11).innerHTML = `<img src="../images/open.gif" alt="Your GIF"></a>`;
+      row.insertCell(11).innerHTML = `<img class="book" src="../images/open.gif" alt="Your GIF"></a>`;
       count++;
 
 
