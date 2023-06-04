@@ -2,7 +2,7 @@
 
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js';
 import { getAnalytics } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-analytics.js';
-import { getAuth } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js';
+import { getAuth,signOut } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js';
 import { getFirestore, collection, doc, getDocs, updateDoc, query, orderBy } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js';
 import { getStorage, ref, getDownloadURL } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-storage.js';
 
@@ -68,7 +68,19 @@ auth.onAuthStateChanged(async function (user) {
 
     }
 
+    document.getElementById("logout").addEventListener("click", function (event) {
+      event.preventDefault();
+      signOut(auth).then(() => {
+          // Sign-out successful.
+          console.log('Sign-out successful.');
+          alert('Sign-out successful.');
+          
+      }).catch((error) => {
+          // An error happened.
+          console.log('An error happened.');
+      });
+  });
   } else {
-    window.location.href = "../login.html";
+    window.location.href = "../index.html";
   }
 });

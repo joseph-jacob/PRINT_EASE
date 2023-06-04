@@ -1,15 +1,15 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js';
 import { getAuth } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js';
-import { getFirestore, collection, getDocs,where,orderBy ,query} from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js';
+import { getFirestore, collection, getDocs, where, orderBy, query } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js';
 import { getStorage, ref, getDownloadURL } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-storage.js';
 const firebaseConfig = {
-    apiKey: "AIzaSyBCtvK5bUFqSRGWYTVXnNLHsSdSMMfyEdQ",
-    authDomain: "printease-875ad.firebaseapp.com",
-    projectId: "printease-875ad",
-    storageBucket: "printease-875ad.appspot.com",
-    messagingSenderId: "903339769147",
-    appId: "1:903339769147:web:cd509e3189d24e59ad8b1e",
-    measurementId: "G-L1DX6GPNRG"
+  apiKey: "AIzaSyBCtvK5bUFqSRGWYTVXnNLHsSdSMMfyEdQ",
+  authDomain: "printease-875ad.firebaseapp.com",
+  projectId: "printease-875ad",
+  storageBucket: "printease-875ad.appspot.com",
+  messagingSenderId: "903339769147",
+  appId: "1:903339769147:web:cd509e3189d24e59ad8b1e",
+  measurementId: "G-L1DX6GPNRG"
 };
 
 // Initialize Firebase
@@ -23,7 +23,7 @@ auth.onAuthStateChanged(async function (user) {
     console.log(user.uid);
     // Retrieve data from Firestore
     const collectionRef = collection(db, 'data');
-    const querySnapshot = await getDocs(query(collectionRef, where('uid', '==', user.uid),orderBy('timestamp')));
+    const querySnapshot = await getDocs(query(collectionRef, where('uid', '==', user.uid), orderBy('timestamp')));
 
     // Get the container element where the cards will be displayed
     const cardContainer = document.getElementById('card-container');
@@ -69,6 +69,19 @@ auth.onAuthStateChanged(async function (user) {
 
       // Append the card to the card container
       cardContainer.appendChild(card);
+    });
+
+    document.getElementById("logout").addEventListener("click", function (event) {
+      event.preventDefault();
+      signOut(auth).then(() => {
+        // Sign-out successful.
+        console.log('Sign-out successful.');
+        alert('Sign-out successful.');
+        document.getElementById('logout').style.display = 'none';
+      }).catch((error) => {
+        // An error happened.
+        console.log('An error happened.');
+      });
     });
   } else {
     // The user is not signed in.
