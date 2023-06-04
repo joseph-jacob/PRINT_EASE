@@ -39,7 +39,8 @@ auth.onAuthStateChanged(async function (user) {
 
       const row = document.getElementById("tbody").insertRow(0);
       row.insertCell(0).innerHTML = count;
-      row.insertCell(1).innerHTML = doc.data().email;
+      //row.insertCell(1).innerHTML = doc.data().email;
+      row.insertCell(1).innerHTML = `<a href="./othersProfile/index.html?uid=${doc.data().uid}&email=${doc.data().email}">${doc.data().email}</a>`;
       row.insertCell(2).innerHTML = doc.data().FName;
       row.insertCell(3).innerHTML = doc.data().Fprice;
       row.insertCell(4).innerHTML = doc.data().Fmethod;

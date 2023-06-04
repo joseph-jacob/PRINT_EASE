@@ -22,8 +22,11 @@ const storage = getStorage(app);
 
 auth.onAuthStateChanged(async function (user) {
     if (user) {
+      const urlParams = new URLSearchParams(window.location.search);
+      const uid = urlParams.get('uid');
+      const email = urlParams.get('email');
       const collectionRef = collection(db, 'user');
-      const q = query(collectionRef, where('UserId', '==', user.uid));
+      const q = query(collectionRef, where('UserId', '==',uid));
       const querySnapshot = await getDocs(q);
       
       if (!querySnapshot.empty) {
@@ -33,7 +36,7 @@ auth.onAuthStateChanged(async function (user) {
           // Populate the HTML elements with the retrieved data
           //document.getElementById("profile-photo").src ="https://img.icons8.com/bubbles/100/000000/user.png";
           document.getElementById("name").textContent = userData.Name;
-          document.getElementById("email").textContent = user.email;
+          document.getElementById("email").textContent = email;
           document.getElementById("department").textContent = userData.Dept;
           document.getElementById("mobile").textContent = userData.Phno;
         });
@@ -43,17 +46,4 @@ auth.onAuthStateChanged(async function (user) {
     } else {
       window.location.href = "../index.html";
     }
-    document.getElementById("resetPassword").addEventListener("click", function (event) {
-      event.preventDefault();
-      var email = user.email;
-      // Send password reset email
-      sendPasswordResetEmail(auth, email)
-        .then(() => {
-          alert("Password reset email sent!");
-        })
-        .catch((error) => {
-          alert("Error sending password reset email:", error);
-        });
-    
-    });
   });
