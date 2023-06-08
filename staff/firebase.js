@@ -2,7 +2,7 @@
 
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js';
 import { getAnalytics } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-analytics.js';
-import { getAuth,signOut } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js';
+import { getAuth, signOut } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js';
 import { getFirestore, collection, doc, getDocs, updateDoc, query, orderBy } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js';
 import { getStorage, ref, getDownloadURL } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-storage.js';
 
@@ -39,7 +39,7 @@ auth.onAuthStateChanged(async function (user) {
 
       const row = document.getElementById("tbody").insertRow(0);
       row.insertCell(0).innerHTML = count;
-      //row.insertCell(1).innerHTML = doc.data().email;
+      
       row.insertCell(1).innerHTML = `<a href="./othersProfile/index.html?uid=${doc.data().uid}&email=${doc.data().email}">${doc.data().email}</a>`;
       row.insertCell(2).innerHTML = doc.data().FName;
       row.insertCell(3).innerHTML = doc.data().Fprice;
@@ -51,36 +51,64 @@ auth.onAuthStateChanged(async function (user) {
       row.insertCell(9).innerHTML = `<audio src="${audioDownloadURL}" controls></audio>`;
       row.insertCell(10).innerHTML = doc.data().Fstatus;
       row.insertCell(11).innerHTML = `<img class="book" src="../images/open.gif" alt="Your GIF"></a>`;
+      if (doc.data().Fstatus == 'Done') {
+        row.insertCell(12).innerHTML = `<img class="tick" src="../images/tick.png" alt="Your GIF"></a>`;
+      } else if (doc.data().Fstatus == 'Processing') {
+        row.insertCell(12).innerHTML = `<input class="checbox" type="checkbox">`;
+        const checkElement = row.cells[12].querySelector(".checbox");
+        checkElement.onclick = async function () {
+          var params = {
+            email: doc.data().email,
+            Fname: doc.data().Fname,
+            price: doc.data().price,
+          };
+          const serviceID = "service_lgqfta2";
+          const templateID = "template_cci5hjr";
+
+          emailjs.send(serviceID, templateID, params).then(
+            function (response) {
+              console.log("SUCCESS!", response.status, response.text);
+              updatePending(docId,"Done")
+              row.insertCell(12).innerHTML = `<img class="tick" src="../images/tick.png" alt="Your GIF"></a>`;
+            },
+            function (error) {
+              console.log("FAILED...", error);
+              alert("Error sending email: " + error);
+            }
+          );
+        }
+      }
       count++;
 
 
       var done = "Done";
-      const imageElement = row.cells[11].querySelector("img");
+      const imageElement = row.cells[11].querySelector(".book");
       imageElement.onclick = async function () {
-        sessionStorage.setItem("documentId", docId);
-        sessionStorage.setItem("pdfDownloadURL", pdfDownloadURL);
-        sessionStorage.setItem("email", doc.data().email);
-        sessionStorage.setItem("Fname", doc.data().FName);
-        sessionStorage.setItem("price", doc.data().Fprice);
-
-        window.location.href = "./update.html";
-        //window.location.href = pdfDownloadURL;
+        updatePending(docId,"Processing")
+        location.reload();
+        window.open(pdfDownloadURL);
       }
-
     }
+
 
     document.getElementById("logout").addEventListener("click", function (event) {
       event.preventDefault();
       signOut(auth).then(() => {
-          // Sign-out successful.
-          console.log('Sign-out successful.');
-          alert('Sign-out successful.');
-          
+        // Sign-out successful.
+        console.log('Sign-out successful.');
+        alert('Sign-out successful.');
+
       }).catch((error) => {
-          // An error happened.
-          console.log('An error happened.');
+        // An error happened.
+        console.log('An error happened.');
       });
-  });
+    });
+
+    async function updatePending(docId,status) {
+      const documentRef = doc(db, 'data', docId);
+      await updateDoc(documentRef, { Fstatus: status });
+    }
+
   } else {
     window.location.href = "../index.html";
   }

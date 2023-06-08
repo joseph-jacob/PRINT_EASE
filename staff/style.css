@@ -34,10 +34,17 @@
 }
 
  
-
+.checbox{
+  min-width: 25px;
+  min-height: 25px;
+}
 .book{
     max-width: 30px;
     max-height: 30px;
+}
+.tick{
+  max-width: 30px;
+  max-height: 30px;
 }
 audio{
   max-width: 250px;
