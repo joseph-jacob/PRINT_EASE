@@ -35,7 +35,6 @@ auth.onAuthStateChanged(async function (user) {
       // Clear the table body
       const tableBody = document.getElementById('tbody');
       tableBody.innerHTML = '';
-
       const selectedDate = document.getElementById('date').value;
       console.log(selectedDate);
       // Rest of your query logic using the selectedDate
@@ -81,6 +80,7 @@ auth.onAuthStateChanged(async function (user) {
                 console.log("SUCCESS!", response.status, response.text);
                 updatePending(docId, "Done")
                 row.insertCell(12).innerHTML = `<img class="tick" src="../images/tick.png" alt="Your GIF"></a>`;
+                checkElement.style.display="none"
               },
               function (error) {
                 console.log("FAILED...", error);
@@ -94,7 +94,6 @@ auth.onAuthStateChanged(async function (user) {
         const imageElement = row.cells[11].querySelector(".book");
         imageElement.onclick = async function () {
           updatePending(docId, "Processing")
-          location.reload();
           window.open(pdfDownloadURL);
         }
       }
@@ -118,6 +117,10 @@ auth.onAuthStateChanged(async function (user) {
         console.log('An error happened.');
       });
     });
+    async function updatePending(docId, status) {
+      const documentRef = doc(db, 'data', docId);
+      await updateDoc(documentRef, { Fstatus: status });
+    }
 
   } else {
     window.location.href = "../index.html";
