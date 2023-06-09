@@ -192,19 +192,17 @@ auth.onAuthStateChanged(function (user) {
     let dateTimeU;
     function dateTime() {
       const currentDate = new Date();
-      const currentTime = new Date();
       const year = currentDate.getFullYear();
-      const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+      const month = String(currentDate.getMonth() + 1).padStart(2, '0');
       const day = String(currentDate.getDate()).padStart(2, '0');
-      const hours = String(currentTime.getHours() + 1).padStart(2, '0');
-      const minutes = currentTime.getMinutes();
-      const seconds = currentTime.getSeconds();
-      // Format the date
+      const hours = String(currentDate.getHours()).padStart(2, '0');
+      const minutes = String(currentDate.getMinutes()).padStart(2, '0');
+      const seconds = String(currentDate.getSeconds()).padStart(2, '0');
+      
       date = `${year}-${month}-${day}`;
-      time = `${hours}-${minutes}-${seconds}`
-      dateTimeU = `${date}/${time}`
-      console.log("Current date:", date);
-      console.log(time);
+      time = `${hours}:${minutes}:${seconds}`;
+      dateTimeU = `${date}/${time}`;
+      
 
     }
 
