@@ -1,5 +1,5 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js';
-import { getAuth } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js';
+import { getAuth,signOut } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js';
 import { getFirestore, collection, getDocs, where, orderBy, query } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js';
 import { getStorage, ref, getDownloadURL } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-storage.js';
 const firebaseConfig = {
@@ -85,6 +85,6 @@ auth.onAuthStateChanged(async function (user) {
     });
   } else {
     // The user is not signed in.
-    window.location.href = '../.index.html';
+    window.location.href = '../index.html';
   }
 });

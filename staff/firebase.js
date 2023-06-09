@@ -35,7 +35,6 @@ auth.onAuthStateChanged(async function (user) {
       // Clear the table body
       const tableBody = document.getElementById('tbody');
       tableBody.innerHTML = '';
-    
       const selectedDate = document.getElementById('date').value;
       const selectedStatus = getSelectedRadioValue();
     
@@ -74,18 +73,16 @@ auth.onAuthStateChanged(async function (user) {
         row.insertCell(2).innerHTML = doc.data().FName;
         row.insertCell(3).innerHTML = doc.data().Fprice;
         row.insertCell(4).innerHTML = doc.data().Fmethod;
-        row.insertCell(5).innerHTML = doc.data().Date;
-        row.insertCell(6).innerHTML = doc.data().Fcount;
-        row.insertCell(7).innerHTML = doc.data().FType;
-        row.insertCell(8).innerHTML = doc.data().Fside;
-        row.insertCell(9).innerHTML = `<audio src="${audioDownloadURL}" controls></audio>`;
-        row.insertCell(10).innerHTML = doc.data().Fstatus;
-        row.insertCell(11).innerHTML = `<img class="book" src="../images/open.gif" alt="Your GIF"></a>`;
+        row.insertCell(5).innerHTML = doc.data().Fcount;
+        row.insertCell(6).innerHTML = doc.data().FType;
+        row.insertCell(7).innerHTML = doc.data().Fside;
+        row.insertCell(8).innerHTML = `<audio src="${audioDownloadURL}" controls></audio>`;
+        row.insertCell(9).innerHTML = `<img class="book" src="../images/open.gif" alt="Your GIF"></a>`;
         if (doc.data().Fstatus == 'Done') {
-          row.insertCell(12).innerHTML = `<img class="tick" src="../images/tick.png" alt="Your GIF"></a>`;
+          row.insertCell(10).innerHTML = `<img class="tick" src="../images/tick.png" alt="Your GIF"></a>`;
         } else if (doc.data().Fstatus == 'Processing') {
-          row.insertCell(12).innerHTML = `<input class="checbox" type="checkbox">`;
-          const checkElement = row.cells[12].querySelector(".checbox");
+          row.insertCell(10).innerHTML = `<input class="checbox" type="checkbox">`;
+          const checkElement = row.cells[10].querySelector(".checbox");
           checkElement.onclick = async function () {
             var params = {
               email: doc.data().email,
@@ -137,6 +134,8 @@ auth.onAuthStateChanged(async function (user) {
         console.log('An error happened.');
       });
     });
+
+
     async function updatePending(docId, status) {
       const documentRef = doc(db, 'data', docId);
       await updateDoc(documentRef, { Fstatus: status });

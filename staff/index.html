@@ -26,32 +26,32 @@
   </div>
   <h1 style="text-align:center;" style="font-family:poppins;">Order history</h1>
   <div class="container">
-  <div class="rabtn">
-    <div class="radio-inputs">
-      <label class="radio">
-        <input type="radio" name="radio" checked="" value="all">
-        <span class="name">All</span>
-      </label>
-      <label class="radio">
-        <input type="radio" name="radio" value="Pending">
-        <span class="name">Pending</span>
-      </label>
-      <label class="radio">
-        <input type="radio" name="radio" value ="Processing">
-        <span class="name">Processing</span>
-      </label>
-          
-      <label class="radio">
-        <input type="radio" name="radio" value="Done">
-        <span class="name">Done</span>
-      </label>
+    <div class="rabtn">
+      <div class="radio-inputs">
+        <label class="radio">
+          <input type="radio" name="radio" checked="" value="all">
+          <span class="name">All</span>
+        </label>
+        <label class="radio">
+          <input type="radio" name="radio" value="Pending">
+          <span class="name">Pending</span>
+        </label>
+        <label class="radio">
+          <input type="radio" name="radio" value="Processing">
+          <span class="name">Processing</span>
+        </label>
+
+        <label class="radio">
+          <input type="radio" name="radio" value="Done">
+          <span class="name">Done</span>
+        </label>
+      </div>
+    </div>
+    <div class="dateDiv">
+      <label for="start" class="dateLabel">Date:</label>
+      <input type="date" id="date" min="2023-01-01" class="dateInput">
     </div>
   </div>
-  <div class="dateDiv">
-    <label for="start" class="dateLabel">Date:</label>
-    <input type="date" id="date" min="2023-01-01" class="dateInput">
-  </div>
-</div>
   <div></div>
   <div></div>
   <div></div>
@@ -64,13 +64,12 @@
     <th scope="col">File Name</th>
     <th scope="col">RS</th>
     <th scope="col">Payment Mode</th>
-    <th scope="col">Date</th>
     <th scope="col">No. of copies</th>
     <th scope="col">Type</th>
     <th scope="col">Side</th>
     <th scope="col">Audio</th>
-    <th scope="col">Status</th>
     <th scope="col">Print</th>
+    <th scope="col">Status</th>
     </tr>
     </thead>
     <tbody class="table-group-divider" id="tbody">
@@ -89,4 +88,3 @@
 </script>
 
 </html>
-</a>
