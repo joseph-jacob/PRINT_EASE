@@ -23,7 +23,7 @@ auth.onAuthStateChanged(async function (user) {
     console.log(user.uid);
     // Retrieve data from Firestore
     const collectionRef = collection(db, 'data');
-    const querySnapshot = await getDocs(query(collectionRef, where('uid', '==', user.uid), orderBy('timestamp')));
+    const querySnapshot = await getDocs(query(collectionRef, where('uid', '==', user.uid), orderBy('timestamp',"desc")));
 
     // Get the container element where the cards will be displayed
     const cardContainer = document.getElementById('card-container');

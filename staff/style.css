@@ -291,6 +291,17 @@ audio{
   margin-top: 1rem;
   justify-content: end;
 }
+.dateLabel {
+  font-weight: bold;
+  margin-right: 10px;
+  margin-top: 5px;
+}
+
+.dateInput {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
 
 .rabtn{
   margin-top: 1rem;

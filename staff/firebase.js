@@ -47,7 +47,7 @@ auth.onAuthStateChanged(async function (user) {
       if (selectedStatus === 'all') {
         querySnapshot = await getDocs(query(
           dataCollectionRef,
-          orderBy("timestamp"),
+          orderBy("timestamp","desc"),
           where('Date', '==', selectedDate)
         ));
       } else {
@@ -96,7 +96,7 @@ auth.onAuthStateChanged(async function (user) {
               function (response) {
                 console.log("SUCCESS!", response.status, response.text);
                 updatePending(docId, "Done")
-                row.insertCell(12).innerHTML = `<img class="tick" src="../images/tick.png" alt="Your GIF"></a>`;
+                row.insertCell(10).innerHTML = `<img class="tick" src="../images/tick.png" alt="Your GIF"></a>`;
                 checkElement.style.display="none"
               },
               function (error) {
@@ -108,7 +108,7 @@ auth.onAuthStateChanged(async function (user) {
         }
         count++;
         var done = "Done";
-        const imageElement = row.cells[11].querySelector(".book");
+        const imageElement = row.cells[9].querySelector(".book");
         imageElement.onclick = async function () {
           updatePending(docId, "Processing")
           window.open(pdfDownloadURL);
