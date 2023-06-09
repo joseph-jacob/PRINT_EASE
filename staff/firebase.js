@@ -35,11 +35,31 @@ auth.onAuthStateChanged(async function (user) {
       // Clear the table body
       const tableBody = document.getElementById('tbody');
       tableBody.innerHTML = '';
+    
       const selectedDate = document.getElementById('date').value;
+      const selectedStatus = getSelectedRadioValue();
+    
       console.log(selectedDate);
-      // Rest of your query logic using the selectedDate
+      console.log(selectedStatus);
+    
       const dataCollectionRef = collection(db, "data");
-      const querySnapshot = await getDocs(query(dataCollectionRef, orderBy("timestamp"), where('Date', '==', selectedDate)));
+      let querySnapshot;
+    
+      if (selectedStatus === 'all') {
+        querySnapshot = await getDocs(query(
+          dataCollectionRef,
+          orderBy("timestamp"),
+          where('Date', '==', selectedDate)
+        ));
+      } else {
+        querySnapshot = await getDocs(query(
+          dataCollectionRef,
+          orderBy("timestamp"),
+          where('Date', '==', selectedDate),
+          where('Fstatus', '==', selectedStatus)
+        ));
+      }
+    
       let count = 1;
       for (const doc of querySnapshot.docs) {
         const pdfRef = ref(storage, doc.data().File);
@@ -121,8 +141,30 @@ auth.onAuthStateChanged(async function (user) {
       const documentRef = doc(db, 'data', docId);
       await updateDoc(documentRef, { Fstatus: status });
     }
+    var radios = document.getElementsByName('radio');
+for (var i = 0; i < radios.length; i++) {
+  radios[i].addEventListener('change', function() {
+    var selectedValue = getSelectedRadioValue();
+    // Do something with the selected value
+    handleQuery();
+  });
+}
 
   } else {
     window.location.href = "../index.html";
   }
 });
+
+function getSelectedRadioValue() {
+  var radios = document.getElementsByName('radio');
+  var selectedValue = '';
+
+  for (var i = 0; i < radios.length; i++) {
+    if (radios[i].checked) {
+      selectedValue = radios[i].value;
+      break;
+    }
+  }
+
+  return selectedValue;
+}

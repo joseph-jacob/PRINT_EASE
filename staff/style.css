@@ -250,7 +250,7 @@ audio{
   align-items: center;
   flex-wrap: wrap;
   border-radius: 0.5rem;
-  background-color: #EEE;
+  background-color: cornflowerblue;
   box-sizing: border-box;
   box-shadow: 0 0 0px 1px rgba(0, 0, 0, 0.06);
   padding: 0.25rem;
@@ -275,12 +275,13 @@ audio{
   border-radius: 0.5rem;
   border: none;
   padding: .5rem 0;
-  color: rgba(51, 65, 85, 1);
+  color: white;
   transition: all .15s ease-in-out;
 }
 
 .radio-inputs .radio input:checked + .name {
   background-color: #fff;
+  color: #000;
   font-weight: 600;
 }
 
