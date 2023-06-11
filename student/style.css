@@ -137,7 +137,7 @@ body {
     border-radius: 0.7rem;
 }
 
-button {
+.buttonA {
     padding: 15px 25px;
     border: unset;
     border-radius: 15px;
@@ -155,7 +155,7 @@ button {
 }
 
 
-button::before {
+.buttonA::before {
     content: "";
     position: absolute;
     top: 0;
@@ -170,11 +170,11 @@ button::before {
     transition: all 250ms
 }
 
-button:hover {
+.buttonA:hover {
     color: #e8e8e8;
 }
 
-button:hover::before {
+.buttonA:hover::before {
     width: 100%;
 }
 
@@ -184,10 +184,16 @@ button:hover::before {
     align-items: center;
 }
 
-.button-wrapper button {
+.button-wrapper .buttonA {
     margin-left: 1rem;
 }
 .book{
     max-width: 30px;
     max-height: 30px;
+}
+.del{
+    margin-left: 60%;
+    height: 38px;
+    width: 35px;
+    padding-right:32px;
 }

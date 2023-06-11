@@ -22,7 +22,7 @@ const auth = getAuth();
 const db = getFirestore();
 const storage = getStorage(app);
 auth.onAuthStateChanged(async function (user) {
-  if (user) {
+  if (user.uid =='5w3QtqWjjSOazqmwX7teQEEPB6k2') {
     const currentDate = new Date()
     const year = currentDate.getFullYear();
     const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Months are zero-based
