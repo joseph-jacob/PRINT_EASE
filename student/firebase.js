@@ -1,7 +1,7 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js';
-import { getAuth,signOut } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js';
-import { getFirestore, collection, getDocs, where, orderBy, query ,deleteDoc} from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js';
-import { getStorage, ref, getDownloadURL,deleteObject } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-storage.js';
+import { getAuth, signOut } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js';
+import { getFirestore, collection, getDocs, where, orderBy, query, deleteDoc } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js';
+import { getStorage, ref, getDownloadURL, deleteObject } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-storage.js';
 const firebaseConfig = {
   apiKey: "AIzaSyBCtvK5bUFqSRGWYTVXnNLHsSdSMMfyEdQ",
   authDomain: "printease-875ad.firebaseapp.com",
@@ -63,26 +63,28 @@ auth.onAuthStateChanged(async function (user) {
 
       // Add the click event listener to the delete button
       deleteButton.addEventListener('click', async () => {
-        try {
-          if (data.Fstatus === 'Pending') {
-            // Delete the document from Firestore
-            await deleteDoc(doc.ref);
-      
-            // Delete the corresponding file from Firebase Storage
-            await deleteObject(storageRef);
-      
-            // Remove the card from the UI
-            card.remove();
-      
-            console.log('Document and file deleted successfully.');
-          } else {
-            console.log('File cannot be deleted. Status is not pending.');
+        let result = window.confirm("Are you sure to Delete your order")
+        if (result === true) {
+          try {
+            if (data.Fstatus === 'Pending') {
+              // Delete the document from Firestore
+              await deleteDoc(doc.ref);
+
+              // Delete the corresponding file from Firebase Storage
+              await deleteObject(storageRef);
+
+              // Remove the card from the UI
+              card.remove();
+
+              console.log('Document and file deleted successfully.');
+            } else {
+              console.log('File cannot be deleted. Status is not pending.');
+            }
+          } catch (error) {
+            console.error('Error deleting document and file:', error);
           }
-        } catch (error) {
-          console.error('Error deleting document and file:', error);
         }
       });
-      
 
       // Populate the card content with the retrieved data and download URL
       cardContent.innerHTML = `
@@ -94,8 +96,8 @@ auth.onAuthStateChanged(async function (user) {
         <a href="${downloadURL}"><img class="book" src="../../images/open.gif" alt="Your GIF"></a>
       `;
       if (data.Fstatus === 'Pending') {
-      // Append the delete button to the card content
-      cardContent.appendChild(deleteButton);
+        // Append the delete button to the card content
+        cardContent.appendChild(deleteButton);
       }
       // Append the card content to the box
       box.appendChild(cardContent);
