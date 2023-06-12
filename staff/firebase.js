@@ -21,6 +21,20 @@ const analytics = getAnalytics(app);
 const auth = getAuth();
 const db = getFirestore();
 const storage = getStorage(app);
+
+document.getElementById("search").addEventListener("click",function(event){
+  var searchQuery = document.getElementById("searchInput").value.toLowerCase();
+  var tableRows = document.getElementById("tbody").getElementsByTagName("tr");
+  for (var i = 0; i < tableRows.length; i++) {
+    var rowData = tableRows[i].textContent.toLowerCase();
+    if (rowData.includes(searchQuery)) {
+      tableRows[i].style.display = "";
+    } else {
+      tableRows[i].style.display = "none";
+    }
+  }
+});
+
 auth.onAuthStateChanged(async function (user) {
   if (user.uid =='5w3QtqWjjSOazqmwX7teQEEPB6k2') {
     const currentDate = new Date()

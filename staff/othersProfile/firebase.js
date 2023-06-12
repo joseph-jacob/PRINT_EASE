@@ -19,7 +19,6 @@ const analytics = getAnalytics(app);
 const auth = getAuth();
 const db = getFirestore();
 const storage = getStorage(app);
-
 auth.onAuthStateChanged(async function (user) {
     if (user) {
       const urlParams = new URLSearchParams(window.location.search);

@@ -63,19 +63,16 @@ auth.onAuthStateChanged(async function (user) {
 
       // Add the click event listener to the delete button
       deleteButton.addEventListener('click', async () => {
-        let result = window.confirm("Are you sure to Delete your order")
+        let result = window.confirm("Are you sure to delete your order?");
         if (result === true) {
           try {
             if (data.Fstatus === 'Pending') {
               // Delete the document from Firestore
               await deleteDoc(doc.ref);
-
               // Delete the corresponding file from Firebase Storage
               await deleteObject(storageRef);
-
               // Remove the card from the UI
               card.remove();
-
               console.log('Document and file deleted successfully.');
             } else {
               console.log('File cannot be deleted. Status is not pending.');

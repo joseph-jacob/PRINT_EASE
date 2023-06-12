@@ -307,3 +307,28 @@ audio{
   margin-top: 1rem;
   padding-left: 36%;
 }
+
+.sbutton {
+  padding: 5px 10px;
+  font-size: 14px;
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.sbutton:hover {
+  background-color: #45a049;
+}
+
+#searchInput {
+  padding: 5px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+#searchInput:focus {
+  outline: none;
+}
