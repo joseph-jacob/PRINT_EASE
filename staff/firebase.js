@@ -98,13 +98,10 @@ auth.onAuthStateChanged(async function (user) {
             row.insertCell(10).innerHTML = `<input class="checbox" type="checkbox">`;
             const checkElement = row.cells[10].querySelector(".checbox");
             checkElement.onclick = async function () {
-              console.log(doc.data().email)
-              console.log(doc.data().FName)
-              console.log(doc.data().Fprice)
               var params = {
                 email: doc.data().email,
-                Fname: doc.data().Fname,
-                price: doc.data().price,
+                Fname: doc.data().FName,
+                price: doc.data().Fprice,
               };
               const serviceID = "service_lgqfta2";
               const templateID = "template_cci5hjr";
