@@ -285,7 +285,7 @@ buttonWrapper.addEventListener("click", () => {
     buttonWrapper.classList.add("loading");
     setTimeout(() => {
       buttonWrapper.classList.add("done");
-      setTimeout(() => buttonWrapper.classList.remove("loading", "done"), 1500);
-    }, 2400);
+      setTimeout(() => buttonWrapper.classList.remove("loading", "done"), 100);
+    }, 2800);
   }
 });
