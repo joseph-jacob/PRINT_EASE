@@ -61,6 +61,9 @@ document.getElementById("register").addEventListener("click", async function (ev
   if (!validatePassword(password1, password2)) {
     return; // Prevent form submission
   }
+  if (!validatePhone(phno)) {
+    return;
+  }
   createUserWithEmailAndPassword(auth, email, password1)
     .then(async (userCredential) => {
       // Signed in 
@@ -127,5 +130,15 @@ function validatePassword(password1, password2) {
   } else {
     alert("Password does not match the confirmation.");
     return false; // Passwords do not match
+  }
+}
+function validatePhone(phno) {
+  var phoneno = /^\d{10}$/;
+  if (phno.match(phoneno)) {
+    return true;
+  }
+  else {
+    alert("Invalid phone number");
+    return false;
   }
 }
