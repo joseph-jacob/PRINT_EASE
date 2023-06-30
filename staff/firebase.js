@@ -20,53 +20,53 @@ const analytics = getAnalytics(app);
 const auth = getAuth();
 const db = getFirestore();
 const storage = getStorage(app);
-var totalPrices=0;
-document.getElementById("search").addEventListener("click",function(event){
+var totalPrices = 0;
+document.getElementById("search").addEventListener("click", function (event) {
   var searchQuery = document.getElementById("searchInput").value.toLowerCase();
   var tableRows = document.getElementById("tbody").getElementsByTagName("tr");
-  totalPrices=0;
+  totalPrices = 0;
   for (var i = 0; i < tableRows.length; i++) {
     var rowData = tableRows[i].textContent.toLowerCase();
     if (rowData.includes(searchQuery)) {
       tableRows[i].style.display = "";
-      totalPrices+=parseFloat(tableRows[i].cells[3].innerHTML);
+      totalPrices += parseFloat(tableRows[i].cells[3].innerHTML);
     } else {
       tableRows[i].style.display = "none";
     }
   }
-  document.getElementById("totalPrice").innerHTML ="Rs " + Math.ceil(totalPrices);
+  document.getElementById("totalPrice").innerHTML = "Rs " + Math.ceil(totalPrices);
 });
 
 auth.onAuthStateChanged(async function (user) {
   if (user) {
-    if(user.uid=="5w3QtqWjjSOazqmwX7teQEEPB6k2"){
+    if (user.uid == "5w3QtqWjjSOazqmwX7teQEEPB6k2") {
       const currentDate = new Date()
       const year = currentDate.getFullYear();
       const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Months are zero-based
       const day = String(currentDate.getDate()).padStart(2, '0');
       const date = `${year}-${month}-${day}`;
-      
+
       // Set the value of the date input field to the current date
       document.getElementById('date').value = date;
       // Function to handle the query when the date input value changes
       const handleQuery = async function () {
-        totalPrices=0;
+        totalPrices = 0;
         // Clear the table body
         const tableBody = document.getElementById('tbody');
         tableBody.innerHTML = '';
         const selectedDate = document.getElementById('date').value;
         const selectedStatus = getSelectedRadioValue();
-      
+
         console.log(selectedDate);
         console.log(selectedStatus);
-      
+
         const dataCollectionRef = collection(db, "data");
         let querySnapshot;
-      
+
         if (selectedStatus === 'all') {
           querySnapshot = await getDocs(query(
             dataCollectionRef,
-            orderBy("timestamp","desc"),
+            orderBy("timestamp", "desc"),
             where('Date', '==', selectedDate)
           ));
         } else {
@@ -77,7 +77,7 @@ auth.onAuthStateChanged(async function (user) {
             where('Fstatus', '==', selectedStatus)
           ));
         }
-      
+
         let count = 1;
         for (const doc of querySnapshot.docs) {
           const pdfRef = ref(storage, doc.data().File);
@@ -97,7 +97,7 @@ auth.onAuthStateChanged(async function (user) {
           row.insertCell(7).innerHTML = doc.data().Fside;
           row.insertCell(8).innerHTML = `<audio src="${audioDownloadURL}" controls></audio>`;
           row.insertCell(9).innerHTML = `<img class="book" src="../images/open.gif" alt="Your GIF"></a>`;
-          totalPrices+=doc.data().Fprice;
+          totalPrices += doc.data().Fprice;
           if (doc.data().Fstatus == 'Done') {
             row.insertCell(10).innerHTML = `<img class="tick" src="../images/tick.png" alt="Your GIF"></a>`;
           } else if (doc.data().Fstatus == 'Processing') {
@@ -111,13 +111,13 @@ auth.onAuthStateChanged(async function (user) {
               };
               const serviceID = "service_lgqfta2";
               const templateID = "template_cci5hjr";
-  
+
               emailjs.send(serviceID, templateID, params).then(
                 function (response) {
                   console.log("SUCCESS!", response.status, response.text);
                   updatePending(docId, "Done")
                   row.insertCell(10).innerHTML = `<img class="tick" src="../images/tick.png" alt="Your GIF"></a>`;
-                  checkElement.style.display="none"
+                  checkElement.style.display = "none"
                 },
                 function (error) {
                   console.log("FAILED...", error);
@@ -134,46 +134,46 @@ auth.onAuthStateChanged(async function (user) {
             window.open(pdfDownloadURL);
           }
         }
-        document.getElementById("totalPrice").innerHTML ="Rs " + Math.ceil(totalPrices);
+        document.getElementById("totalPrice").innerHTML = "Rs " + Math.ceil(totalPrices);
       };
-  
+
       // Add event listener to the date input field
       document.getElementById("date").addEventListener("input", handleQuery);
-  
+
       // Call the handleQuery function initially to perform the query with the initial date value
       handleQuery();
-  
+
       document.getElementById("logout").addEventListener("click", function (event) {
         event.preventDefault();
         signOut(auth).then(() => {
           // Sign-out successful.
           console.log('Sign-out successful.');
           alert('Sign-out successful.');
-  
+
         }).catch((error) => {
           // An error happened.
           console.log('An error happened.');
         });
       });
-  
-  
+
+
       async function updatePending(docId, status) {
         const documentRef = doc(db, 'data', docId);
         await updateDoc(documentRef, { Fstatus: status });
       }
       var radios = document.getElementsByName('radio');
-  for (var i = 0; i < radios.length; i++) {
-    radios[i].addEventListener('change', function() {
-      var selectedValue = getSelectedRadioValue();
-      // Do something with the selected value
-      handleQuery();
-    });
-  }
-  
-    }else{
+      for (var i = 0; i < radios.length; i++) {
+        radios[i].addEventListener('change', function () {
+          var selectedValue = getSelectedRadioValue();
+          // Do something with the selected value
+          handleQuery();
+        });
+      }
+
+    } else {
       window.location.href = "../index.html";
     }
-    
+
 
   } else {
     window.location.href = "../index.html";
