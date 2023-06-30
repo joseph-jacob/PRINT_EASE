@@ -21,6 +21,20 @@ const storage = getStorage();
 auth.onAuthStateChanged(async function (user) {
   if (user) {
     console.log(user.uid);
+    document.getElementById("search").addEventListener("click",function(event){
+      var searchQuery = document.getElementById("searchInput").value.toLowerCase();
+      //write function for search from this card
+      var tableRows = document.getElementById("card-container").getElementsByTagName("div");
+      for (var i = 0; i < tableRows.length; i++) {
+        var rowData = tableRows[i].textContent.toLowerCase();
+        if (rowData.includes(searchQuery)) {
+          tableRows[i].style.display = "";
+        } else {
+          tableRows[i].style.display = "none";
+        }
+      }
+    });
+    
     // Retrieve data from Firestore
     const collectionRef = collection(db, 'data');
     const querySnapshot = await getDocs(query(collectionRef, where('uid', '==', user.uid), orderBy('timestamp', "desc")));
@@ -87,7 +101,7 @@ auth.onAuthStateChanged(async function (user) {
       cardContent.innerHTML = `
         <object data="${downloadURL}" type="application/pdf"></object>
         <strong>${data.FName}</strong>
-        <span>Price: ${data.Fprice}</span><br>
+        <span>Price: Rs ${Math.ceil(data.Fprice)}</span><br>
         <span>Date: ${data.Date}</span><br>
         <span>Status: ${data.Fstatus}</span><br>
         <a href="${downloadURL}"><img class="book" src="../../images/open.gif" alt="Your GIF"></a>

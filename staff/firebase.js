@@ -20,18 +20,21 @@ const analytics = getAnalytics(app);
 const auth = getAuth();
 const db = getFirestore();
 const storage = getStorage(app);
-
+var totalPrices=0;
 document.getElementById("search").addEventListener("click",function(event){
   var searchQuery = document.getElementById("searchInput").value.toLowerCase();
   var tableRows = document.getElementById("tbody").getElementsByTagName("tr");
+  totalPrices=0;
   for (var i = 0; i < tableRows.length; i++) {
     var rowData = tableRows[i].textContent.toLowerCase();
     if (rowData.includes(searchQuery)) {
       tableRows[i].style.display = "";
+      totalPrices+=parseFloat(tableRows[i].cells[3].innerHTML);
     } else {
       tableRows[i].style.display = "none";
     }
   }
+  document.getElementById("totalPrice").innerHTML ="Rs " + Math.ceil(totalPrices);
 });
 
 auth.onAuthStateChanged(async function (user) {
@@ -42,10 +45,12 @@ auth.onAuthStateChanged(async function (user) {
       const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Months are zero-based
       const day = String(currentDate.getDate()).padStart(2, '0');
       const date = `${year}-${month}-${day}`;
+      
       // Set the value of the date input field to the current date
       document.getElementById('date').value = date;
       // Function to handle the query when the date input value changes
       const handleQuery = async function () {
+        totalPrices=0;
         // Clear the table body
         const tableBody = document.getElementById('tbody');
         tableBody.innerHTML = '';
@@ -92,6 +97,7 @@ auth.onAuthStateChanged(async function (user) {
           row.insertCell(7).innerHTML = doc.data().Fside;
           row.insertCell(8).innerHTML = `<audio src="${audioDownloadURL}" controls></audio>`;
           row.insertCell(9).innerHTML = `<img class="book" src="../images/open.gif" alt="Your GIF"></a>`;
+          totalPrices+=doc.data().Fprice;
           if (doc.data().Fstatus == 'Done') {
             row.insertCell(10).innerHTML = `<img class="tick" src="../images/tick.png" alt="Your GIF"></a>`;
           } else if (doc.data().Fstatus == 'Processing') {
@@ -128,6 +134,7 @@ auth.onAuthStateChanged(async function (user) {
             window.open(pdfDownloadURL);
           }
         }
+        document.getElementById("totalPrice").innerHTML ="Rs " + Math.ceil(totalPrices);
       };
   
       // Add event listener to the date input field
