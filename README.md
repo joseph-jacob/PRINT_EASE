@@ -1,2 +1,3 @@
 # PRINT_EASE
 Our Mini Project
+PrintEase is a comprehensive solution addressing operational challenges at our college's printing shop, including order tracking, invoice generation, and real-time notifications. It offers an efficient, user-friendly platform for shop owners and staff to manage operations, aiming to enhance productivity, reduce errors, and improve the customer experience. With features such as real-time job status updates and online order submission and payments, it minimizes the need for physical visits, potentially reducing shop congestion and automates essential processes like billing, order tracking, and customer management.
